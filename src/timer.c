@@ -8,6 +8,7 @@ bool timer_callback(__unused struct repeating_timer *t)
 {
     toggle = !toggle;
     gpio_put(OUT_PIN, toggle);
+    cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, toggle);
     return true;
 }
 
@@ -24,8 +25,9 @@ int main(void)
     gpio_init(OUT_PIN);
     gpio_set_dir(OUT_PIN, GPIO_OUT);
     gpio_put(OUT_PIN, toggle);
-
+    hard_assert(cyw43_arch_init() == PICO_OK);
     add_repeating_timer_ms(-DELAY_MS, timer_callback, NULL, &timer);
-    while(1) __nop();
+    while (1)
+        __nop();
     return 0;
 }
