@@ -1,7 +1,7 @@
 #ifndef LAB5_H
 #define LAB5_H
 
-#define OUT_PIN 1
-#define DELAY_MS 10
+#define OUT_PIN 0
+#define DELAY_MS 100
 
 #endif
