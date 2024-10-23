@@ -45,3 +45,10 @@ Drift over 1 hour: ~0.02s
 | Period      | 200.0016 ms | 200.0016 ms | 199.9992 ms | 1.176 us    | 200        |
 
 Drift over 1 hour: ~0.03s
+
+### Agilent Function Generator
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 200.004 ms  | 200.0256 ms | 199.9824 ms | 7.296 us    | 201        |
+
+Drift over 1 hour: ~0.07s
