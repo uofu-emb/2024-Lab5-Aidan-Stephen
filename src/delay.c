@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <pico/stdlib.h>
-#include <pico/cyw43_arch.h>
 #include <FreeRTOS.h>
 #include <task.h>
 #include "lab5.h"
@@ -11,7 +10,10 @@ void main_task(__unused void *params)
     while (1) {
         toggle = !toggle;
         gpio_put(OUT_PIN, toggle);
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, toggle);
+        for (int i = 0; i < 50000; i++)
+        {
+            __nop();
+        }
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
     }
 }
@@ -21,7 +23,6 @@ int main(void)
     stdio_init_all();
     gpio_init(OUT_PIN);
     gpio_set_dir(OUT_PIN, GPIO_OUT);
-    hard_assert(cyw43_arch_init() == PICO_OK);
     const char *rtos_name = "FreeRTOS";
     TaskHandle_t task;
     xTaskCreate(main_task, "MainThread",

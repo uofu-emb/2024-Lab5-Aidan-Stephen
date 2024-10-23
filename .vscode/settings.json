@@ -39,6 +39,8 @@
     "raspberry-pi-pico.python3Path": "python3",
     "files.associations": {
         "stdlib.h": "c",
-        "sync.h": "c"
+        "sync.h": "c",
+        "cyw43_arch.h": "c",
+        "task.h": "c"
     }
 }
