@@ -1,6 +1,6 @@
 # Lab 9: Realtime - Aidan and Stephen
 ## Actvity 1: Jitter and Drift
-#### Note: These samples were taken while the on-board LED was flashing, which may add some variability
+Drift is calculated by dividing the average period by the expected period, then multiplying that by 3600 (the number of seconds in 1 hour). You can then take the difference between the result and 3600 to find the expected drift.
 ### Delay.c
 | Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
 |-------------|-------------|-------------|-------------|-------------|------------|
@@ -27,3 +27,5 @@ Drift over 1 hour:
 | Duty Cycle  | 50%         | 50.25%      | 49.75%      | 0.18%       |            |
 
 Drift over 1 hour:
+
+#### Note: These samples were taken while the on-board LED was flashing, which may add some variability
