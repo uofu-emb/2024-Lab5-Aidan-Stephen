@@ -52,3 +52,8 @@ Drift over 1 hour: ~0.03s
 | Period      | 200.004 ms  | 200.0256 ms | 199.9824 ms | 7.296 us    | 201        |
 
 Drift over 1 hour: ~0.07s
+
+### Measure latency of interrupt handler
+Measured delay between sync signal and output of board: 1.21us
+
+Measured delay between sync signal and output of board with busy wait loop: 2.0097ms
