@@ -1,10 +1,59 @@
-# Renode setup
-The Raspberry Pico needs configuration files for Renode to work properly.
+# Lab 9: Realtime - Aidan and Stephen
+## Actvity 1: Jitter and Drift
+Drift is calculated by dividing the average period by the expected period, then multiplying that by 3600 (the number of seconds in 1 hour). You can then take the difference between the result and 3600 to find the expected drift.
+### Delay.c
+#### No busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 200.0016 ms | 200.0016 ms | 199.9992 ms | 1.152 us    | 219        |
 
-* On MacOS, the installation location is `/Applications/Renode.app/Contents/MacOs`
-* On Linux, the location for Debian, Fedora, and Arch is `/opt/renode`
-* On Windows, the location is `C://Program Files/Renode`
+Drift over 1 hour: ~0.03s
 
-To add the Pico configuration files:
-1. Copy `rp2040_spinlock.py` and `rp2040_divider.py` to the `scripts/pydev` directory of your Renode installation.
-1. Copy `rpi_pico_rp2040_w.repl` to the `platforms/cpus` directory.
+#### Busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 204.0024 ms | 204.0024 ms | 204 ms      | 1.2 us      | 200        |
+
+Drift over 1 hour: ~72s
+
+### Sleep.c
+#### No busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 200.0016 ms | 200.0016 ms | 199.9992 ms | 1.056 us    | 200        |
+
+Drift over 1 hour: ~0.03
+
+#### Busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 205.6008 ms | 205.6008 ms | 205.5984 ms | 1.176 us    | 200        |
+
+Drift over 1 hour: ~100.8s
+
+### Timer.c
+#### No busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 199.9988 ms | 200.0011 ms | 199.9988 ms | 598 ns      | 200        |
+
+Drift over 1 hour: ~0.02s
+
+#### Busy-wait loop
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 200.0016 ms | 200.0016 ms | 199.9992 ms | 1.176 us    | 200        |
+
+Drift over 1 hour: ~0.03s
+
+### Agilent Function Generator
+| Measurement | Average     | Max         | Min         | Std. Dev.   | Wave Count |
+|-------------|-------------|-------------|-------------|-------------|------------|
+| Period      | 200.004 ms  | 200.0256 ms | 199.9824 ms | 7.296 us    | 201        |
+
+Drift over 1 hour: ~0.07s
+
+### Measure latency of interrupt handler
+Measured delay between sync signal and output of board: 1.21us
+
+Measured delay between sync signal and output of board with busy wait loop: 2.0097ms
